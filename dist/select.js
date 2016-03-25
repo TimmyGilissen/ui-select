@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.16.0 - 2016-03-23T20:51:56.609Z
+ * Version: 0.16.1 - 2016-03-25T23:46:00.713Z
  * License: MIT
  */
 
@@ -1103,6 +1103,22 @@ uis.directive('uiSelect',
             throw uiSelectMinErr('transcluded', "Expected 1 .ui-select-choices but got '{0}'.", transcludedChoices.length);
           }
           element.querySelectorAll('.ui-select-choices').replaceWith(transcludedChoices);
+
+          var transcludedHeader = transcluded.querySelectorAll('.ui-select-header');
+          if(transcludedHeader && transcludedHeader.length){
+            transcludedHeader.removeAttr('ui-select-header'); //To avoid loop in case directive as attr
+            transcludedHeader.removeAttr('data-ui-select-header'); // Properly handle HTML5 data-attributes
+            $timeout(function(){
+              transcludedChoices.prepend(transcludedHeader);
+            });
+          }
+
+          var transcludedFooter = transcluded.querySelectorAll('.ui-select-footer');
+          if(transcludedFooter && transcludedFooter.length){
+            transcludedFooter.removeAttr('ui-select-footer'); //To avoid loop in case directive as attr
+            transcludedFooter.removeAttr('data-ui-select-footer'); // Properly handle HTML5 data-attributes
+            transcludedChoices.append(transcludedFooter);
+          }
         });
 
         // Support for appending the select field to the body when its open
@@ -1263,6 +1279,22 @@ uis.directive('uiSelect',
   };
 }]);
 
+uis.directive('uiSelectFooter', function(){
+  return {
+    template: '<li class="ui-select-footer" ng-transclude></li>',
+    restrict: 'EA',
+    transclude: true,
+    replace: true
+  };
+});
+uis.directive('uiSelectHeader', function(){
+  return {
+    template: '<li class="ui-select-header" ng-transclude></li>',
+    restrict: 'EA',
+    transclude: true,
+    replace: true
+  };
+});
 uis.directive('uiSelectMatch', ['uiSelectConfig', function(uiSelectConfig) {
   return {
     restrict: 'EA',
