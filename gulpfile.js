@@ -113,7 +113,7 @@ gulp.task('recommendedBump', function(done) {
 
   conventionalRecommendedBump({preset: 'angular'}, function(err, importance) {
     // Get all the files to bump version in
-    gulp.src(['./package.json'])
+    gulp.src(['./package.json', './bower.json'])
       .pipe($.bump({type: importance}))
       .pipe(gulp.dest('./'));
 
@@ -129,7 +129,7 @@ gulp.task('changelog', function() {
 });
 
 gulp.task('push', function(done) {
-  $.git.push();
+  $.git.push('origin', 'master', {args: '--follow-tags'});
   done();
 });
 
@@ -147,7 +147,7 @@ gulp.task('tag', function() {
 });
 
 gulp.task('bump', function(done) {
-  runSequence('changelog', 'recommendedBump', 'add', 'commit', 'tag', 'push', done);
+  runSequence('recommendedBump', 'changelog', 'add', 'commit', 'tag', 'push', done);
 });
 
 var handleError = function (err) {
