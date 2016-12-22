@@ -33,6 +33,7 @@ uis.directive('uiSelectChoices',
       var parserResult = RepeatParser.parse(tAttrs.repeat);
 
       var choices = tElement.querySelectorAll('.ui-select-choices-row');
+      console.debug(choices);
       if (choices.length !== 1) {
         throw uiSelectMinErr('rows', "Expected 1 .ui-select-choices-row but got '{0}'.", choices.length);
       }
