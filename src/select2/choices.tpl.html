@@ -5,7 +5,7 @@
       id="ui-select-choices-{{ $select.generatedId }}" ng-class="{'select2-result-sub': $select.choiceGrouped($group), 'select2-result-single': !$select.choiceGrouped($group) }">
       <li role="option" ng-attr-id="ui-select-choices-row-{{ $select.generatedId }}-{{$index}}" class="ui-select-choices-row" ng-class="{'select2-highlighted': $select.isActive(this), 'select2-disabled': $select.isDisabled(this)}"
       title="first title">
-        <div class="select2-result-label ui-select-choices-row-inner"></div>
+        <div class="select2-result-label ui-select-choices-row-inner" title="{{item.text}}"></div>
       </li>
     </ul>
   </li>
