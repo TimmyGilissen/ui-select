@@ -1,7 +1,7 @@
 /*!
- * ui-select
+ * @sdworx/ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.18.1 - 2016-12-27T13:03:22.302Z
+ * Version: 0.18.2 - 2017-05-16T15:01:17.463Z
  * License: MIT
  */
 
@@ -658,7 +658,6 @@ uis.controller('uiSelectCtrl',
     return isDisabled;
   };
 
-
   // When the user selects an item with ENTER or clicks the dropdown
   ctrl.select = function(item, skipFocusser, $event) {
     if (item === undefined || !_isItemDisabled(item)) {
@@ -811,7 +810,6 @@ uis.controller('uiSelectCtrl',
       return isLocked;
     };
   }
-
 
   var sizeWatch = null;
   var updaterScheduled = false;
@@ -1002,6 +1000,10 @@ uis.controller('uiSelectCtrl',
     }
 
     var highlighted = choices[ctrl.activeIndex];
+    if (!highlighted) {
+      container[0].scrollTop = 24 * ctrl.activeIndex;
+      return;
+    }
     var posY = highlighted.offsetTop + highlighted.clientHeight - container[0].scrollTop;
     var height = container[0].offsetHeight;
 

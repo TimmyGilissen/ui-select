@@ -367,7 +367,6 @@ uis.controller('uiSelectCtrl',
     return isDisabled;
   };
 
-
   // When the user selects an item with ENTER or clicks the dropdown
   ctrl.select = function(item, skipFocusser, $event) {
     if (item === undefined || !_isItemDisabled(item)) {
@@ -520,7 +519,6 @@ uis.controller('uiSelectCtrl',
       return isLocked;
     };
   }
-
 
   var sizeWatch = null;
   var updaterScheduled = false;
@@ -711,6 +709,10 @@ uis.controller('uiSelectCtrl',
     }
 
     var highlighted = choices[ctrl.activeIndex];
+    if (!highlighted) {
+      container[0].scrollTop = 24 * ctrl.activeIndex;
+      return;
+    }
     var posY = highlighted.offsetTop + highlighted.clientHeight - container[0].scrollTop;
     var height = container[0].offsetHeight;
 
