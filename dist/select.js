@@ -1,7 +1,7 @@
 /*!
  * @sdworx/ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.18.2 - 2017-05-26T06:06:22.531Z
+ * Version: 0.18.3 - 2017-05-26T06:13:11.037Z
  * License: MIT
  */
 
